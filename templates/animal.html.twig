@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Nos animaux{% endblock %}
+
+{% block body %}
+
+    <div class="container py-5">
+
+        {# En-tête #}
+        <div class="text-center mb-5">
+
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+                REFUGE ANIMALIER
+            </span>
+
+            <h1 class="display-5 font-weight-bold mb-3">
+                Découvrez nos animaux
+            </h1>
+
+            <p class="text-muted lead mx-auto"
+               style="max-width: 650px;">
+
+                Découvrez les animaux actuellement disponibles
+                à l'adoption et trouvez votre futur compagnon.
+
+            </p>
+
+        </div>
+
+
+        {# Liste des animaux #}
+        <div class="row">
+
+            {% for animal in animals %}
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+
+                    <div class="card h-100 border-0 shadow-sm rounded">
+
+                        {# Image #}
+                        <div class="bg-primary d-flex align-items-center justify-content-center"
+                             style="height: 200px;">
+
+                            {% if animal.image %}
+
+                                <img src="{{ asset('uploads/animals/' ~ animal.image) }}"
+                                     alt="{{ animal.name }}"
+                                     class="w-100 h-100"
+                                     style="object-fit: cover;">
+
+                            {% else %}
+
+                                <span class="text-white"
+                                      style="font-size: 70px;">
+                                    🐾
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="card-body p-4 d-flex flex-column">
+
+                            {# Nom #}
+                            <h2 class="h4 font-weight-bold mb-3">
+                                {{ animal.name }}
+                            </h2>
+
+
+                            {# Âge #}
+                            <p class="text-muted mb-2">
+
+                                🐾
+
+                                {{ animal.age }}
+
+                                {% if animal.age > 1 %}
+                                    ans
+                                {% else %}
+                                    an
+                                {% endif %}
+
+                            </p>
+
+
+                            {# Description #}
+                            <p class="text-muted mb-4">
+
+                                {% if animal.description|length > 100 %}
+
+                                    {{ animal.description|slice(0, 100) }}...
+
+                                {% else %}
+
+                                    {{ animal.description }}
+
+                                {% endif %}
+
+                            </p>
+
+
+                            {# Statut #}
+                            <div class="mb-3">
+
+                                <span class="badge badge-success">
+                                    Disponible à l'adoption
+                                </span>
+
+                            </div>
+
+
+                            {# Bouton #}
+                            <div class="mt-auto">
+
+                                {# À remplacer quand nous aurons créé la fiche animal #}
+                                <button class="btn btn-primary rounded-pill px-4"
+                                        disabled>
+
+                                    Voir la fiche
+                                    <span class="ml-2">→</span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            {% else %}
+
+                {# Aucun animal #}
+                <div class="col-12">
+
+                    <div class="text-center py-5">
+
+                        <div style="font-size: 70px;">
+                            🐾
+                        </div>
+
+                        <h2 class="h3 font-weight-bold">
+                            Aucun animal disponible
+                        </h2>
+
+                        <p class="text-muted">
+                            Il n'y a actuellement aucun animal disponible
+                            à l'adoption.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+{% endblock %}
