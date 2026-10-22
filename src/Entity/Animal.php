@@ -25,9 +25,7 @@ class Animal
     private string $name;
 
     #[Column(type: 'string', length: 255, unique: true, nullable: false)]
-    #[Assert\NotBlank]
-    #[Assert\Type('string')]
-    private string $slug;
+    private ?string $slug = null;
 
     #[Column(type: 'text', nullable: false)]
     #[Assert\NotBlank]

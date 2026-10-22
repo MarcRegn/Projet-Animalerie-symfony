@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5 mb-5">
+
+        <h1>Ajouter un animal</h1>
+
+        {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.age) }}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <button type="submit" class="btn btn-primary mt-3">
+            Créer l'animal
+        </button>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
