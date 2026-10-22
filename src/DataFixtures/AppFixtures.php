@@ -3,51 +3,19 @@
 namespace App\DataFixtures;
 
 use App\Entity\Animal;
-use App\Entity\User;
 use App\Enum\AnimalStatus;
-use App\Enum\RoleUser;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    public function __construct(
-        private readonly UserPasswordHasherInterface $hasher
-    ) {
-    }
-
     public function load(ObjectManager $manager): void
     {
-        $admin = $this->user(
-            $manager,
-            'admin',
-            'admin@refuge.test',
-            'azerty',
-            [RoleUser::Admin->value]
-        );
-
-        $member = $this->user(
-            $manager,
-            'member',
-            'member@refuge.test',
-            'azerty',
-            [RoleUser::Member->value]
-        );
-
-        $user = $this->user(
-            $manager,
-            'user',
-            'user@refuge.test',
-            'azerty',
-            [RoleUser::User->value]
-        );
-
         $this->animal(
             $manager,
             'Milo',
             'milo',
-            'Milo est un animal affectueux et joueur qui cherche une famille aimante.',
+            'Milo est un chien ',
             2,
             AnimalStatus::Available
         );
@@ -56,7 +24,7 @@ class AppFixtures extends Fixture
             $manager,
             'Luna',
             'luna',
-            'Luna est calme et apprécie la compagnie. Elle attend son futur foyer.',
+            'Luna est calme ',
             4,
             AnimalStatus::Available
         );
@@ -65,7 +33,7 @@ class AppFixtures extends Fixture
             $manager,
             'Oscar',
             'oscar',
-            'Oscar est actuellement en cours d’adoption.',
+            'Oscar est en cours d’adoption',
             3,
             AnimalStatus::AdoptionPending
         );
@@ -74,34 +42,12 @@ class AppFixtures extends Fixture
             $manager,
             'Bella',
             'bella',
-            'Bella a trouvé sa famille pour la vie.',
+            'Bella est adoptée',
             5,
             AnimalStatus::Adopted
         );
 
         $manager->flush();
-    }
-
-    private function user(
-        ObjectManager $manager,
-        string $username,
-        string $email,
-        string $password,
-        array $roles
-    ): User {
-        $user = new User();
-        $user->setUsername($username);
-        $user->setEmail($email);
-        $user->setRoles($roles);
-        $user->setPassword(
-            $this->hasher->hashPassword(
-                $user,
-                $password
-            )
-        );
-        $manager->persist($user);
-
-        return $user;
     }
 
     private function animal(
