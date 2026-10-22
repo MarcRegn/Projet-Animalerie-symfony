@@ -110,8 +110,8 @@
                             </div>
 
 
-                            {# Bouton #}
-                            <div class="mt-auto">
+                            {# Boutons #}
+                            <div class="mt-auto d-flex align-items-center">
 
                                 {# À remplacer quand nous aurons créé la fiche animal #}
                                 <button class="btn btn-primary rounded-pill px-4"
@@ -121,6 +121,13 @@
                                     <span class="ml-2">→</span>
 
                                 </button>
+
+                                {% if is_granted('ROLE_MEMBER') %}
+                                    <a href="{{ path('edit-animal', {id: animal.id}) }}"
+                                       class="btn btn-outline-secondary rounded-pill px-4 ml-2">
+                                        Modifier
+                                    </a>
+                                {% endif %}
 
                             </div>
 

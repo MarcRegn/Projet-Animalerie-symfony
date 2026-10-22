@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Animal;
 use Symfony\Component\Form\AbstractType;
+use App\Enum\AnimalStatus;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,6 +27,11 @@ class AnimalType extends AbstractType
 
             ->add('age', IntegerType::class, [
                 'label' => 'Âge',
+            ])
+
+            ->add('status', EnumType::class, [
+                'class' => AnimalStatus::class,
+                'label' => 'Statut',
             ]);
     }
 

@@ -73,24 +73,12 @@
                     </a>
                 </li>
 
-                {# Utilisateur connecté #}
-                {% if is_granted('ROLE_USER') %}
-
-                    <li class="nav-item">
-                        <a class="nav-link font-weight-bold"
-                           href="#">
-                            Mes demandes
-                        </a>
-                    </li>
-
-                {% endif %}
-
                 {# Membre du refuge #}
                 {% if is_granted('ROLE_MEMBER') %}
 
                     <li class="nav-item">
                         <a class="nav-link font-weight-bold"
-                           href="#">
+                           href="{{ path('manage-animal') }}">
                             Gestion
                         </a>
                     </li>
